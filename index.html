@@ -1,114 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YOUR PROJECT • ICO</title>
+    <title>MAYG | Fight for Love</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@700&display=swap');
         body { font-family: 'Inter', system-ui, sans-serif; }
-        .title-font { font-family: 'Space Grotesk', sans-serif; }
-        .hero-bg { background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 100%); }
-        .neon { text-shadow: 0 0 20px #22ff88; }
+        .title-font { font-family: 'Playfair Display', sans-serif; }
+        .neon-red { text-shadow: 0 0 20px #ff0044, 0 0 40px #ff0044; }
     </style>
 </head>
-<body class="bg-zinc-950 text-white">
+<body class="bg-black text-white overflow-x-hidden">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full bg-zinc-950/90 backdrop-blur-md border-b border-white/10 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-lg border-b border-red-900 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center text-xl font-bold">★</div>
-                <span class="title-font text-2xl font-semibold tracking-tighter">YOUR PROJECT</span>
+                <span class="text-3xl font-black tracking-tighter title-font neon-red">MAYG</span>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
-                <a href="#tokenomics" class="hover:text-emerald-400 transition-colors">Tokenomics</a>
-                <a href="#roadmap" class="hover:text-emerald-400 transition-colors">Roadmap</a>
-                <a href="#faq" class="hover:text-emerald-400 transition-colors">FAQ</a>
+            <div class="hidden md:flex items-center gap-8 text-sm uppercase tracking-widest">
+                <a href="#" class="hover:text-red-500 transition">GAME</a>
+                <a href="#" class="hover:text-red-500 transition">STORY</a>
+                <a href="#" class="hover:text-red-500 transition">COMMUNITY</a>
+                <a href="#" class="hover:text-red-500 transition">DISCORD</a>
             </div>
-            <a href="#buy" class="bg-emerald-500 hover:bg-emerald-600 px-6 py-3 rounded-2xl font-semibold text-sm transition-colors">BUY TOKEN</a>
+            <a href="https://prod-api.mayg.io/launcher-windows-app" 
+               class="bg-red-600 hover:bg-red-700 px-8 py-3 text-sm font-bold tracking-widest transition rounded-none">
+                PLAY NOW
+            </a>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero-bg pt-24 pb-20 min-h-screen flex items-center">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <!-- HERO -->
+    <section class="min-h-screen flex items-center relative">
+        <div class="absolute inset-0 bg-[radial-gradient(at_center,#4a0000_0%,transparent_70%)] opacity-40"></div>
+        <div class="max-w-7xl mx-auto px-6 pt-32 pb-20 text-center relative z-10">
+            <h1 class="text-7xl md:text-8xl font-black tracking-tighter title-font neon-red leading-none mb-6">
+                FIGHT FOR LOVE
+            </h1>
+            <p class="text-2xl md:text-4xl text-red-300 mb-12">A Love Story of Empire, Violence &amp; Power</p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="https://prod-api.mayg.io/launcher-windows-app" 
+                   class="bg-white text-black px-12 py-6 text-xl font-bold hover:scale-105 transition flex items-center gap-3">
+                    <i class="fas fa-download"></i> DOWNLOAD LAUNCHER
+                </a>
+                <a href="#discord" 
+                   class="border border-red-500 hover:bg-red-500/10 px-12 py-6 text-xl font-bold transition">
+                    JOIN DISCORD
+                </a>
+            </div>
+
+            <div class="mt-20 text-sm uppercase tracking-[4px] text-red-400">
+                Official Launch • 4/20/2026
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-xs tracking-widest">
+            <div class="animate-bounce">SCROLL FOR LOVE</div>
+            <i class="fas fa-chevron-down mt-2"></i>
+        </div>
+    </section>
+
+    <!-- QUICK INFO BAR -->
+    <div class="bg-zinc-950 border-y border-red-900 py-8">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-3 text-center gap-8">
             <div>
-                <h1 class="text-6xl md:text-7xl font-bold title-font leading-none neon">The Future<br>of Decentralized<br>Finance is Here</h1>
-                <p class="mt-6 text-xl text-zinc-400 max-w-md">YOUR PROJECT is the next-generation DeFi token powering a revolutionary ecosystem. Join the ICO now.</p>
-                
-                <!-- Countdown -->
-                <div id="countdown" class="mt-10 grid grid-cols-4 gap-4 text-center max-w-xs">
-                    <div class="bg-white/10 backdrop-blur rounded-3xl p-4"><div id="days" class="text-4xl font-bold">00</div><div class="text-xs tracking-widest text-zinc-400">DAYS</div></div>
-                    <div class="bg-white/10 backdrop-blur rounded-3xl p-4"><div id="hours" class="text-4xl font-bold">00</div><div class="text-xs tracking-widest text-zinc-400">HOURS</div></div>
-                    <div class="bg-white/10 backdrop-blur rounded-3xl p-4"><div id="minutes" class="text-4xl font-bold">00</div><div class="text-xs tracking-widest text-zinc-400">MIN</div></div>
-                    <div class="bg-white/10 backdrop-blur rounded-3xl p-4"><div id="seconds" class="text-4xl font-bold">00</div><div class="text-xs tracking-widest text-zinc-400">SEC</div></div>
-                </div>
-
-                <div class="mt-10 flex items-center gap-4">
-                    <a href="#buy" class="bg-white text-zinc-950 px-10 py-4 rounded-3xl font-semibold text-lg hover:scale-105 transition-transform">Participate in ICO</a>
-                    <a href="#" target="_blank" class="border border-white/30 hover:border-white/70 px-8 py-4 rounded-3xl font-medium flex items-center gap-2">
-                        <i class="fa-solid fa-file-lines"></i> Whitepaper
-                    </a>
-                </div>
+                <div class="text-red-500 text-sm tracking-widest">DISCORD PLAYTIMES</div>
+                <div class="text-lg">10pm–12am US EST<br>8pm–9pm Thailand</div>
             </div>
-
-            <div class="hidden md:flex justify-center">
-                <div class="w-96 h-96 bg-gradient-to-br from-emerald-400 to-cyan-400 rounded-[4rem] flex items-center justify-center text-8xl shadow-2xl shadow-emerald-500/30 rotate-12">
-                    🌐
-                </div>
+            <div>
+                <div class="text-red-500 text-sm tracking-widest">FULLY ORIGINAL PC GAME</div>
+                <div class="text-lg">Turn-based tactical luxury shooter</div>
+            </div>
+            <div>
+                <div class="text-red-500 text-sm tracking-widest">MADE WITH PASSION</div>
+                <div class="text-lg">By Sinjin David Jung &amp; Team</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- About -->
-    <section id="about" class="py-20 bg-zinc-900">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-5xl font-bold title-font">What is YOUR PROJECT?</h2>
-            <p class="mt-8 text-lg text-zinc-400">Replace this text with your actual project description.</p>
-        </div>
-    </section>
+    <!-- REST OF YOUR CONTENT GOES HERE -->
+    <!-- Add more sections (About, Projects, NFT collection, etc.) below as needed -->
 
-    <!-- Token Sale -->
-    <section id="buy" class="py-20 bg-black">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-5xl font-bold title-font">Token Sale is LIVE</h2>
-            <div class="mt-8 bg-zinc-900 rounded-3xl p-12 max-w-2xl mx-auto">
-                <div class="text-emerald-400 text-sm font-medium tracking-widest">1 ETH = 10,000 YOUR TOKEN</div>
-                <div class="mt-6 text-6xl font-bold">$0 / $5M raised</div>
-                <div class="h-4 bg-zinc-800 rounded-full mt-8 overflow-hidden">
-                    <div class="h-4 w-1/4 bg-emerald-500 rounded-full"></div>
-                </div>
-                <button onclick="alert('Wallet connect coming soon!')" class="mt-10 w-full bg-emerald-500 hover:bg-emerald-600 py-6 text-xl font-semibold rounded-3xl transition-colors">BUY NOW WITH ETH / USDT</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tokenomics, Roadmap, FAQ, Footer sections are included in the full template I gave you earlier. For now this is the core. -->
-
-    <footer class="bg-black py-16 border-t border-white/10 text-center text-zinc-400 text-sm">
-        © 2026 YOUR PROJECT. All rights reserved.<br>
-        <span class="text-xs">Cryptocurrency investments involve high risk. DYOR.</span>
+    <footer class="bg-black border-t border-red-900 py-16 text-center text-sm">
+        <p class="text-red-400">© 2026 MAYG • Sinjin David Jung</p>
+        <p class="mt-2 text-zinc-500">All Rights Reserved • Made with ❤️ in Thailand</p>
     </footer>
 
     <script>
-        function countdown() {
-            const endDate = new Date("2026-08-15T23:59:59").getTime();
-            const timer = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = endDate - now;
-                if (distance < 0) { clearInterval(timer); return; }
-
-                document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
-            }, 1000);
-        }
-        window.onload = countdown;
+        // Tailwind script already loaded
+        document.documentElement.setAttribute('data-tailwind', 'dark');
     </script>
 </body>
 </html>
