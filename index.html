@@ -1,461 +1,136 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MAYG - Fight for Love in chaotic turn-based nightclub deathmatches. Your angry Yakuza girlfriend is here to rescue you.">
-    <title>MAYG | FIGHT FOR LOVE</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&amp;family=Roboto+Mono:wght@400;700&display=swap');
-        
-        :root {
-            --neon-pink: #ff00aa;
-            --neon-cyan: #00ffff;
-            --neon-gold: #ffd700;
-        }
-        
-        * {
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-        
-        body {
-            font-family: 'Roboto Mono', monospace;
-        }
-        
-        .heading-font {
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .hero-bg {
-            background: linear-gradient(180deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.95) 100%),
-                        url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
-            /* REPLACE WITH YOUR MIKI-SAN KEY ART URL ABOVE */
-        }
-        
-        .neon-text {
-            text-shadow: 
-                0 0 10px var(--neon-pink),
-                0 0 20px var(--neon-pink),
-                0 0 40px var(--neon-pink);
-        }
-        
-        .neon-button {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .neon-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            100% { transform: translateX(200%); }
-        }
-        
-        .glow-pink {
-            box-shadow: 0 0 15px #ff00aa,
-                        0 0 30px #ff00aa,
-                        0 0 45px #ff00aa;
-        }
-        
-        .glow-cyan {
-            box-shadow: 0 0 15px #00ffff,
-                        0 0 30px #00ffff;
-        }
-        
-        .section-header {
-            position: relative;
-        }
-        
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, #ff00aa, #00ffff);
-        }
-        
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 0 30px #ff00aa;
-        }
-        
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,255,255,0.03) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            animation: scan 4s linear infinite;
-            z-index: 50;
-            opacity: 0.15;
-        }
-        
-        @keyframes scan {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAYG.io • My Angry Yakuza Girlfriend</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .neon-red { text-shadow: 0 0 20px #ff0033, 0 0 40px #ff0033; }
+    .hero-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://picsum.photos/id/1015/1920/1080');
+      background-size: cover;
+      background-position: center;
+    }
+    .button-glow {
+      transition: all 0.4s ease;
+    }
+    .button-glow:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 0 40px #ff0033;
+    }
+    .slash {
+      position: relative;
+    }
+    .slash::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #ffcc00, transparent);
+      bottom: -6px;
+      left: 0;
+      transition: width 0.4s ease;
+    }
+    .slash:hover::after {
+      width: 100%;
+    }
+  </style>
 </head>
-<body class="bg-[#0a0a0a] text-white overflow-x-hidden">
-    <!-- NAVBAR -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#ff00aa]/30">
-        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-9 h-9 bg-gradient-to-br from-[#ff00aa] to-[#00ffff] rounded-full flex items-center justify-center text-black font-bold text-xl rotate-12">M</div>
-                <h1 class="heading-font text-3xl tracking-[4px] neon-text">MAYG</h1>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-x-8 text-sm uppercase tracking-widest">
-                <a href="#game" class="hover:text-[#ff00aa]">THE GAME</a>
-                <a href="#play" class="hover:text-[#ff00aa]">PLAY NOW</a>
-                <a href="#media" class="hover:text-[#ff00aa]">MEDIA</a>
-                <a href="#community" class="hover:text-[#ff00aa]">COMMUNITY</a>
-                <a href="#economy" class="hover:text-[#ff00aa]">ECONOMY</a>
-                <a href="#news" class="hover:text-[#ff00aa]">NEWS</a>
-            </div>
-            
-            <div class="flex items-center gap-x-4">
-                <a href="https://discord.gg/mayg" target="_blank"
-                   class="flex items-center gap-x-2 px-6 py-2.5 bg-transparent border border-[#00ffff] hover:border-[#ff00aa] rounded-full text-[#00ffff] hover:text-white text-sm uppercase tracking-widest">
-                    <i class="fab fa-discord"></i>
-                    JOIN DISCORD
-                </a>
-                <a href="#play" 
-                   class="neon-button px-8 py-3 bg-[#ff00aa] hover:bg-white text-black font-bold uppercase tracking-widest rounded-full glow-pink text-sm">
-                    DOWNLOAD LAUNCHER
-                </a>
-            </div>
-        </div>
-    </nav>
+<body class="bg-black text-white">
 
-    <!-- HERO SECTION -->
-    <section class="hero-bg min-h-screen flex items-center relative pt-16">
-        <div class="max-w-screen-2xl mx-auto px-8 grid md:grid-cols-2 gap-12 items-center h-full">
-            <!-- Left content -->
-            <div class="space-y-8">
-                <div class="inline-flex items-center gap-x-3 bg-black/60 backdrop-blur-md border border-[#ff00aa]/50 px-6 py-2 rounded-full text-[#ff00aa] text-sm tracking-[3px] uppercase">
-                    <div class="w-2 h-2 bg-[#ff00aa] rounded-full animate-pulse"></div>
-                    NOW LIVE
-                </div>
-                
-                <h1 class="text-7xl md:text-8xl leading-none heading-font font-black tracking-[-2px] neon-text">
-                    FIGHT FOR LOVE
-                </h1>
-                
-                <h2 class="text-4xl md:text-5xl leading-tight text-[#00ffff] heading-font tracking-widest">
-                    IN CHAOTIC TURN-BASED<br>NIGHTCLUB DEATHMATCHES
-                </h2>
-                
-                <p class="max-w-md text-xl text-gray-300">
-                    Your angry Yakuza girlfriend is here to rescue you — with bullets, bombs, and zero mercy.
-                </p>
-                
-                <p class="text-lg text-[#ffd700]">
-                    20-second turns. Destructible arenas. One winner.<br>
-                    No pay-to-win. Just skill, strategy, and chaos.
-                </p>
-                
-                <!-- Buttons -->
-                <div class="flex flex-wrap gap-4">
-                    <a href="#play" 
-                       class="neon-button px-10 py-5 bg-[#ff00aa] hover:bg-white text-black text-xl font-bold uppercase rounded-2xl glow-pink flex items-center gap-x-3">
-                        <i class="fas fa-download"></i>
-                        DOWNLOAD LAUNCHER
-                    </a>
-                    
-                    <button onclick="document.getElementById('trailer-video').scrollIntoView({ behavior: 'smooth' })"
-                            class="neon-button px-10 py-5 bg-transparent border-2 border-[#ffd700] hover:border-white text-white text-xl font-bold uppercase rounded-2xl flex items-center gap-x-3">
-                        <i class="fas fa-play"></i>
-                        WATCH TRAILER
-                    </button>
-                </div>
-                
-                <!-- Trust line -->
-                <div class="flex items-center gap-x-8 text-sm text-gray-400">
-                    <div>Windows • Mac • Linux (soon)</div>
-                    <div class="flex items-center gap-x-1">
-                        <span class="text-[#00ffff]">4.98</span>
-                        <i class="fas fa-star text-[#ffd700]"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Right visual / trailer -->
-            <div class="relative hidden md:block">
-                <div id="trailer-video" class="aspect-video bg-black/90 rounded-3xl overflow-hidden border-4 border-[#ff00aa]/30 shadow-2xl glow-cyan">
-                    <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                        <source src="https://your-video-url-here.mp4" type="video/mp4">
-                        <!-- REPLACE src with your 30-second trailer URL -->
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="absolute bottom-6 left-6 bg-black/70 px-4 py-1 rounded-full text-[#ff00aa] text-xs flex items-center gap-x-2">
-                        <i class="fas fa-volume-mute"></i>
-                        MIKI-SAN: “You’re mine to protect… and destroy for.”
-                    </div>
-                </div>
-                
-                <!-- Floating badge -->
-                <div class="absolute -top-6 -right-6 bg-gradient-to-br from-[#ffd700] to-[#ff00aa] text-black font-bold px-8 py-3 rounded-2xl text-2xl rotate-12 shadow-2xl flex items-center gap-x-3">
-                    <i class="fas fa-fire"></i>
-                    1,247 PLAYING NOW
-                </div>
-            </div>
-        </div>
-        
-        <!-- Scroll prompt -->
-        <div class="absolute bottom-10 left-1/2 flex flex-col items-center text-[#00ffff] text-xs tracking-widest">
-            <div class="animate-bounce">SCROLL FOR CHAOS ↓</div>
-        </div>
-        
-        <!-- Subtle scanline overlay -->
-        <div class="scanline"></div>
-    </section>
+  <!-- HERO -->
+  <section class="hero-bg min-h-screen flex items-center relative">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="https://yourdomain.com/MAYG+Logo+Red+LG.png" alt="MAYG Logo" class="mx-auto h-32 mb-8 drop-shadow-2xl">
+      
+      <h1 class="text-7xl md:text-8xl font-black tracking-tighter neon-red mb-4">
+        MY ANGRY<br>YAKUZA GIRLFRIEND
+      </h1>
+      <p class="text-2xl md:text-3xl text-pink-400 mb-10">Fight For Love. Rule The Empire.</p>
+      
+      <div class="flex flex-col md:flex-row gap-6 justify-center">
+        <a href="https://prod-api.mayg.io/launcher-windows-app" 
+           class="button-glow bg-red-600 hover:bg-red-700 text-white px-12 py-6 text-2xl font-bold rounded-xl flex items-center justify-center gap-4 slash">
+          <i class="fas fa-download"></i> PLAY NOW
+        </a>
+        <button onclick="document.getElementById('trailer').scrollIntoView({ behavior: 'smooth' })"
+                class="button-glow border-2 border-white hover:bg-white hover:text-black px-12 py-6 text-2xl font-bold rounded-xl flex items-center justify-center gap-4">
+          <i class="fas fa-play"></i> WATCH TRAILER
+        </button>
+      </div>
+    </div>
 
-    <!-- WHY PLAYERS ARE OBSESSED -->
-    <section class="py-24 border-t border-b border-[#ff00aa]/10 bg-[#0a0a0a]">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <h2 class="text-center text-5xl heading-font mb-16 neon-text">WHY PLAYERS ARE OBSESSED WITH MAYG</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="card-hover bg-[#111] border border-[#ff00aa]/30 rounded-3xl p-8 hover:border-[#ff00aa]">
-                    <div class="w-14 h-14 bg-gradient-to-br from-[#ff00aa] to-[#00ffff] rounded-2xl flex items-center justify-center mb-6 text-3xl">💥</div>
-                    <h3 class="text-3xl font-bold mb-3">Explosive Turn-Based Chaos</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Worms-style destruction meets 3rd-person shooter. Blow up the entire nightclub in 6-10 minute matches. Every wall, table, and VIP booth is a weapon.
-                    </p>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="card-hover bg-[#111] border border-[#ff00aa]/30 rounded-3xl p-8 hover:border-[#ff00aa]">
-                    <div class="w-14 h-14 bg-gradient-to-br from-[#ff00aa] to-[#00ffff] rounded-2xl flex items-center justify-center mb-6 text-3xl">🩸</div>
-                    <h3 class="text-3xl font-bold mb-3">Your Ruthless Yakuza Waifu</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Miki-San doesn’t just fight for you — she fights because of you. Deep story, late-’90s Tokyo Yakuza empire, and a love that never fails.
-                    </p>
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="card-hover bg-[#111] border border-[#ff00aa]/30 rounded-3xl p-8 hover:border-[#ff00aa]">
-                    <div class="w-14 h-14 bg-gradient-to-br from-[#ff00aa] to-[#00ffff] rounded-2xl flex items-center justify-center mb-6 text-3xl">🗣️</div>
-                    <h3 class="text-3xl font-bold mb-3">Social Strategy Deathmatches</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Team up or betray. 20-second turns force real tactics. Voice chat + alliances = the most addictive multiplayer you’ve played this year.
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Stats -->
-            <div class="mt-12 text-center text-[#00ffff] text-sm tracking-widest flex flex-wrap justify-center gap-x-8 gap-y-2">
-                <div>1,247 players online right now</div>
-                <div>•</div>
-                <div>Average match: 8 minutes</div>
-                <div>•</div>
-                <div class="text-[#ffd700]">100% free-to-play core</div>
-            </div>
-        </div>
-    </section>
+    <!-- Characters -->
+    <div class="absolute bottom-10 left-10 hidden lg:block">
+      <img src="https://yourdomain.com/unnamed (1).png" alt="Miki" class="h-96 object-contain drop-shadow-2xl">
+    </div>
+    <div class="absolute bottom-10 right-10 hidden lg:block">
+      <img src="https://yourdomain.com/grok-image-782e86a3-4ed3-452e-ba70-0f48555296aa.jpg" alt="Samurai" class="h-96 object-contain drop-shadow-2xl">
+    </div>
+  </section>
 
-    <!-- LATEST MAYHEM -->
-    <section class="py-24 bg-gradient-to-b from-[#0a0a0a] to-black border-b border-[#ff00aa]/10">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="grid md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-7">
-                    <div class="aspect-video bg-black rounded-3xl overflow-hidden border border-[#00ffff]/30">
-                        <video autoplay muted loop playsinline class="w-full h-full object-cover">
-                            <source src="https://your-short-clip-url-here.mp4" type="video/mp4">
-                            <!-- REPLACE with your 15-second vertical gameplay clip -->
-                        </video>
-                    </div>
-                </div>
-                
-                <div class="md:col-span-5">
-                    <div class="uppercase text-[#ff00aa] text-sm tracking-[2px]">THIS WEEKEND ONLY</div>
-                    <h2 class="text-5xl heading-font leading-none mt-2 mb-6">“DIAMOND HEIST” GAME NIGHT</h2>
-                    <p class="text-xl text-gray-300">10 PM – 12 AM (Thailand / US EST friendly)</p>
-                    <p class="mt-6 text-lg">Double AP + exclusive Black Card NFT drop for winners.</p>
-                    <p class="text-[#ffd700] mt-8 flex items-center gap-x-3">
-                        <i class="fas fa-headset"></i>
-                        Join Discord → Lock in your squad
-                    </p>
-                    
-                    <a href="https://discord.gg/mayg" target="_blank"
-                       class="mt-8 inline-flex items-center gap-x-3 px-10 py-5 bg-transparent border-2 border-[#ffd700] hover:bg-[#ffd700] hover:text-black text-[#ffd700] uppercase rounded-3xl text-lg font-bold">
-                        SEE FULL EVENTS CALENDAR
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- PEEKING DUCK -->
+  <div class="py-6 bg-orange-600 text-center">
+    <img src="https://yourdomain.com/Peeking Duck Studios.png" alt="Peeking Duck Studios" class="mx-auto h-20">
+  </div>
 
-    <!-- MEET MIKI-SAN -->
-    <section class="py-24 bg-black">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <img src="https://picsum.photos/id/1011/1200/800" alt="Miki-San" 
-                         class="rounded-3xl shadow-2xl border border-[#ff00aa]/40">
-                    <!-- REPLACE src with split-screen calm/rage art of Miki-San -->
-                </div>
-                <div>
-                    <div class="text-6xl heading-font leading-none neon-text">"Love never fails…<br>but everyone else does."</div>
-                    <div class="mt-6 text-[#ff00aa] text-xl">— Miki-San, next Oyabun of the Tokyo syndicate</div>
-                    
-                    <p class="mt-10 text-2xl text-gray-300">
-                        She’s rich, dangerous, and completely obsessed with you.<br>
-                        Rescue missions. Nightclub wars. Late-night revenge.
-                    </p>
-                    <p class="mt-6 text-xl">This isn’t just a game. It’s your love story — written in bullets and broken bottles.</p>
-                    
-                    <a href="/the-game" 
-                       class="mt-12 inline-flex items-center px-10 py-5 bg-[#00ffff] hover:bg-white text-black uppercase rounded-3xl font-bold text-lg glow-cyan">
-                        EXPLORE THE FULL STORY
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- LORE -->
+  <section class="py-24 bg-black border-t-4 border-red-600">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-5xl font-bold mb-8 neon-red">THE EMPIRE AWAITS</h2>
+      <div class="prose prose-lg prose-invert mx-auto">
+        <p class="text-xl leading-relaxed">
+          Miki-San — Tokyo socialite by day, next Oyabun of the most powerful Yakuza clan by destiny. 
+          Her true love has been taken hostage. Nothing will stop her.
+        </p>
+        <p class="text-2xl text-pink-400 mt-8 font-semibold">LOVE NEVER FAILS.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- READY TO FIGHT FOR LOVE -->
-    <section id="play" class="py-24 bg-gradient-to-br from-[#111] to-[#0a0a0a]">
-        <div class="max-w-screen-2xl mx-auto px-8 text-center">
-            <h2 class="text-6xl heading-font mb-4">READY TO FIGHT FOR LOVE?</h2>
-            <p class="text-2xl text-[#00ffff]">Your first deathmatch is 2 minutes away.</p>
-            
-            <div class="mt-16 grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <div class="bg-black/70 border border-[#ff00aa]/20 rounded-3xl p-8">
-                    <div class="text-[#ff00aa] text-7xl font-bold mb-4">01</div>
-                    <h4 class="text-2xl">Download the MAYG Launcher</h4>
-                    <p class="text-gray-400 mt-2">(Windows — Mac/Linux coming soon)</p>
-                </div>
-                <div class="bg-black/70 border border-[#ff00aa]/20 rounded-3xl p-8">
-                    <div class="text-[#ff00aa] text-7xl font-bold mb-4">02</div>
-                    <h4 class="text-2xl">Claim your free daily AP</h4>
-                    <p class="text-gray-400 mt-2">(no wallet required)</p>
-                </div>
-                <div class="bg-black/70 border border-[#ff00aa]/20 rounded-3xl p-8">
-                    <div class="text-[#ff00aa] text-7xl font-bold mb-4">03</div>
-                    <h4 class="text-2xl">Jump into your first deathmatch</h4>
-                    <p class="text-gray-400 mt-2">in under 2 minutes</p>
-                </div>
-            </div>
-            
-            <div class="mt-12">
-                <a href="https://your-launcher-download-link.com" 
-                   class="neon-button inline-flex items-center px-16 py-8 bg-[#ff00aa] text-black text-3xl font-bold uppercase rounded-3xl glow-pink">
-                    DOWNLOAD LAUNCHER NOW — IT’S FREE
-                </a>
-            </div>
-            
-            <p class="mt-8 text-[#ffd700]">Zero pay-to-win. True skill. Real ownership.</p>
+  <!-- GAMEPLAY -->
+  <section class="py-24 bg-zinc-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-16">GAMEPLAY</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-zinc-900 p-8 rounded-2xl border border-red-900 hover:border-red-600 transition-all group">
+          <h3 class="text-2xl font-bold mb-4">Turn-Based Shooter</h3>
+          <p class="text-zinc-400">Strategic 20-second turns. Precision aiming meets Yakuza tactics.</p>
         </div>
-    </section>
-
-    <!-- THE MAYG ECONOMY -->
-    <section id="economy" class="py-24 border-t border-b border-[#ff00aa]/10">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="max-w-2xl">
-                <h2 class="text-5xl heading-font neon-text">THE MAYG ECONOMY</h2>
-                <p class="text-3xl text-[#ffd700] mt-6">Play-to-own done right.</p>
-                <p class="mt-8 text-xl leading-relaxed">
-                    $MAYG and $GLB tokens power a real open economy.<br>
-                    Own SYGNE Princess &amp; Black Card NFTs that actually matter in-game.<br>
-                    Daily free plays for everyone — the more you play, the more you earn.
-                </p>
-                
-                <a href="/economy" 
-                   class="mt-10 inline-flex px-12 py-6 border-2 border-[#ffd700] text-[#ffd700] uppercase text-xl font-bold rounded-3xl hover:bg-[#ffd700] hover:text-black">
-                    LEARN HOW THE ECONOMY WORKS
-                </a>
-            </div>
+        <div class="bg-zinc-900 p-8 rounded-2xl border border-red-900 hover:border-red-600 transition-all group">
+          <h3 class="text-2xl font-bold mb-4">Social Alliances</h3>
+          <p class="text-zinc-400">Form alliances. Betray rivals. Voice chat enabled.</p>
         </div>
-    </section>
-
-    <!-- JOIN THE SYNDICATE -->
-    <section id="community" class="py-24 bg-black">
-        <div class="max-w-screen-2xl mx-auto px-8 text-center">
-            <div class="max-w-xl mx-auto">
-                <h2 class="text-6xl heading-font mb-4">JOIN THE SYNDICATE</h2>
-                <p class="text-3xl text-[#00ffff]">10,000+ fighters already in the club</p>
-                
-                <div class="mt-12 bg-[#111] border border-[#ff00aa]/30 rounded-3xl p-12">
-                    <i class="fab fa-discord text-8xl text-[#00ffff] mb-6"></i>
-                    <p class="text-xl">Official game nights, tournaments, dev AMAs, and instant matchmaking help.</p>
-                    <a href="https://discord.gg/mayg" target="_blank"
-                       class="mt-8 block mx-auto w-fit px-16 py-5 bg-[#00ffff] text-black text-2xl font-bold rounded-3xl">JOIN OFFICIAL DISCORD</a>
-                </div>
-                
-                <!-- Social icons -->
-                <div class="flex justify-center gap-x-8 mt-12 text-4xl">
-                    <a href="https://x.com/SinjinMAYG" class="hover:text-[#ff00aa]"><i class="fab fa-x-twitter"></i></a>
-                    <a href="https://discord.gg/mayg" class="hover:text-[#ff00aa]"><i class="fab fa-discord"></i></a>
-                    <a href="https://youtube.com" class="hover:text-[#ff00aa]"><i class="fab fa-youtube"></i></a>
-                    <a href="https://opensea.io" class="hover:text-[#ff00aa]"><i class="fas fa-gem"></i></a>
-                </div>
-            </div>
+        <div class="bg-zinc-900 p-8 rounded-2xl border border-red-900 hover:border-red-600 transition-all group">
+          <h3 class="text-2xl font-bold mb-4">Real Economy</h3>
+          <p class="text-zinc-400">$GLB • $MAYG • NFT Skins • Platinum Pass</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-black border-t border-[#ff00aa]/20 py-12">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-y-6">
-                <div>
-                    <span class="text-[#ff00aa]">© 2026 Peeking Duck Studios</span>
-                    <span class="ml-6">MAYG.io</span>
-                </div>
-                
-                <div class="flex flex-wrap gap-x-8 text-sm uppercase tracking-widest">
-                    <a href="/the-game" class="hover:text-[#00ffff]">The Game</a>
-                    <a href="#play" class="hover:text-[#00ffff]">Play Now</a>
-                    <a href="/media" class="hover:text-[#00ffff]">Media</a>
-                    <a href="#community" class="hover:text-[#00ffff]">Community</a>
-                    <a href="#economy" class="hover:text-[#00ffff]">Economy</a>
-                    <a href="/news" class="hover:text-[#00ffff]">News</a>
-                    <a href="/support" class="hover:text-[#00ffff]">Support</a>
-                </div>
-                
-                <div class="text-xs text-gray-500">Built for chaos • Powered by love</div>
-            </div>
-        </div>
-    </footer>
+  <!-- CTA -->
+  <section class="py-32 bg-gradient-to-b from-black to-red-950 text-center">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-6xl font-black mb-8">Ready to Join the Family?</h2>
+      <a href="https://prod-api.mayg.io/launcher-windows-app" 
+         class="button-glow inline-block bg-white text-black px-16 py-8 text-3xl font-bold rounded-2xl hover:bg-yellow-400 transition-all">
+        DOWNLOAD LAUNCHER
+      </a>
+    </div>
+  </section>
 
-    <script>
-        // Tailwind script initialization
-        function initializeTailwind() {
-            tailwind.config = {
-                content: ["./**/*.{html,js}"],
-                theme: {
-                    extend: {}
-                }
-            }
-        }
-        initializeTailwind();
-        
-        // Simple console message for developers
-        console.log('%c🚀 MAYG.io — FIGHT FOR LOVE loaded. Replace placeholder assets before going live.', 'color:#ff00aa; font-family:Orbitron; font-size:14px');
-    </script>
+  <footer class="bg-black py-12 border-t border-red-900 text-center">
+    <p class="text-zinc-500">© 2026 Peeking Duck Studios • All Rights Reserved</p>
+  </footer>
+
 </body>
 </html>
